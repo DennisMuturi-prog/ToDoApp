@@ -241,4 +241,24 @@ dialog input[type="submit"]:hover {
     background-color: gray;
     color: white;
 }
+.projectpanelselected>ul>li{
+    padding: 5px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    list-style: none;
+    padding-left: 20px;
+    cursor: pointer;
+}
+.projectpanelselected>ul>li::before{
+    content: '▶'; /* Arrow icon for collapsed state */
+    position: relative; /* Absolute positioning */
+    left:0px;
+}
+.projectpanelselected>ul>li.expanded::before {
+    content: '▼';
+}
+.projectpanelselected>ul>li:hover::before {
+    color: #4CAF50; /* Green arrow on hover */
+}
 

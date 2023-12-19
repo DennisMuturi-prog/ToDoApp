@@ -3,6 +3,9 @@ import './todo.css';
 import { addbtn } from "./collectData";
 import createToDoProject, { createToDo} from "./createToDoTask";
 import { createToday } from "./today";
+import { createThisWeek } from "./thisweek";
+import { recreateProjects } from "./projectsRecreation";
+import { createTrash } from "./trash";
 export let projects=[];
 projects.push(project);
 projects.push(createToDoProject("My Project",[createToDo(
@@ -188,9 +191,20 @@ export function createToDoDetailsDiv(item) {
         const todoIndex = todoProject[1];
         
         // Remove the todo item from the project
+        let deletedItems=[];
+        deletedItems.push(projects[projectIndex].todoItems[todoIndex]);
+        if(!localStorage.getItem('deletedItems')){
+            localStorage.setItem('deletedItems',JSON.stringify(deletedItems));
+        }
+        else{
+            let deletedItems=getDeletedItemsFromLocalStorage();
+            deletedItems.push(projects[projectIndex].todoItems[todoIndex]);
+            localStorage.setItem('deletedItems',JSON.stringify(deletedItems));
+        }
+        const contentDiv = document.querySelector('.projects');
         projects[projectIndex].todoItems.splice(todoIndex, 1);
         contentDiv.innerHTML="";
-        localStorage.setItem('projects',JSON.stringify(projects));
+        localStorage.setItem('projects',JSON.stringify(projects)); 
         contentDiv.appendChild(renderProjects(getprojectsFromLocalStorage()));
         
     });
@@ -219,6 +233,10 @@ export function setProjectIndex(index) {
 export function setTodoIndex(index) {
     todoindex2 = index;
 }
+export function getDeletedItemsFromLocalStorage(){
+    const deletedItems=JSON.parse(localStorage.getItem('deletedItems'));
+    return deletedItems;
+}
 
 editConfirmBtn.addEventListener('click', () => {
     const todoItem = projects[projectindex2].todoItems[todoindex2];
@@ -243,6 +261,10 @@ editConfirmBtn.addEventListener('click', () => {
         createToday();
         
     }
+    else if(panel=="Next 7 Days"){
+        mainContent.innerHTML="";
+        createThisWeek();
+    }
 
     // Update the UI or perform any other necessary actions
 });
@@ -262,23 +284,86 @@ sidedivs.forEach((div) => {
         mainContent.innerHTML="";
         panel=div.textContent;
         if(panel=="Projects"){
-            alert("true");
+            recreateProjects(mainContent);
+            const contentDiv = document.querySelector('.projects');
+            contentDiv.appendChild(renderProjects(getprojectsFromLocalStorage()));
+            recreateListeners();
         }
         else if(panel=="Today"){
             createToday();
         }
-        else if(panel=="Upcoming Week"){
-            alert("false");
+        else if(panel=="Next 7 Days"){
+            createThisWeek();
         }
-        else if(panel=="This Month"){
-            //alert("false");
+        else if(panel=="Trash"){
+            createTrash();
+
         }
-        else if(panel=="All"){
-            //alert("false");
-        }
-        else if(panel=="Completed"){
-            //alert("false");
-        }
+        
     });
 });
+function recreateListeners() {
+    const editConfirmBtn=document.querySelector('#edit-todo-dialog #confirm');
+    editConfirmBtn.addEventListener('click', () => {
+        const todoItem = projects[projectindex2].todoItems[todoindex2];
+        const titleInput = document.querySelector('#edit-todo-dialog #edit-todo-title');
+        const descriptionInput = document.querySelector('#edit-todo-dialog #edit-todo-description');
+        const dueDateInput = document.querySelector('#edit-todo-dialog #edit-todo-due-date');
+        const priorityInput = document.querySelector('#edit-todo-dialog #edit-todo-priority');
+        const notesInput = document.querySelector('#edit-todo-dialog #edit-todo-notes');
+        const checklistInput = document.querySelector('#edit-todo-dialog #edit-todo-tasks');
+    
+        todoItem.title = titleInput.value;
+        todoItem.description = descriptionInput.value;
+        todoItem.dueDate = dueDateInput.value;
+        todoItem.priority = priorityInput.value;
+        todoItem.notes = notesInput.value;
+        todoItem.checklist = checklistInput.value.split(',');
+        const contentDiv=document.querySelector('.content');
+        contentDiv.innerHTML="";
+        localStorage.setItem('projects',JSON.stringify(projects));
+        contentDiv.appendChild(renderProjects(getprojectsFromLocalStorage()));
+        if(panel=="Today"){
+            mainContent.innerHTML="";
+            createToday();
+            
+        }
+        else if(panel=="Next 7 Days"){
+            mainContent.innerHTML="";
+            createThisWeek();
+        }
+    
+
+});
+const confirmBtn=document.querySelector('#confirm');
+const toDoConfirmBtn=document.querySelector('#todo-dialog #confirm');
+confirmBtn.addEventListener('click',()=>{
+    const project=createToDoProject(projectname.value,[]);
+    projects.push(project);
+    contentDiv.innerHTML="";
+    localStorage.setItem('projects',JSON.stringify(projects));
+    contentDiv.appendChild(renderProjects(getprojectsFromLocalStorage()));
+});
+toDoConfirmBtn.addEventListener('click',()=>{
+    const title=document.querySelector('#todo-title');
+    const description=document.querySelector('#todo-description');
+    const dueDate=document.querySelector('#todo-due-date');
+    const priority=document.querySelector('#todo-priority');
+    const notes=document.querySelector('#todo-notes');
+    const tasks=document.querySelector('#todo-tasks');
+    const projectIndex=projectIndexer;
+    const todo=createToDo(
+        title.value,
+        description.value,
+        dueDate.value,
+        priority.value,
+        notes.value,
+        [tasks.value]
+    );
+    projects[projectIndex].todoItems.push(todo);
+    localStorage.setItem('projects',JSON.stringify(projects));
+    contentDiv.innerHTML="";
+    contentDiv.appendChild(renderProjects(getprojectsFromLocalStorage()));
+});
+}
 

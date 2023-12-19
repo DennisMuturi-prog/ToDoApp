@@ -1,5 +1,5 @@
 import { getPriorityColor,editDialog,setProjectIndex,setTodoIndex} from "./toDoGUI";
-const mainContentDiv = document.querySelector('.content');
+export const mainContentDiv = document.querySelector('.content');
 export function createToday() {
     const projects = JSON.parse(localStorage.getItem('projects'));
     const date = new Date();
@@ -28,6 +28,7 @@ export function createToday() {
 export function renderToday(todayTodos) {
     const ProjectsDiv = document.createElement('div');
         const projectDiv = document.createElement('div');
+        projectDiv.classList.add('projectpanelselected');
         const todoList = document.createElement('ul');
 
         todayTodos.forEach((item, todoIndex) => {
