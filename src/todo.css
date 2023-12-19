@@ -1,0 +1,244 @@
+.main{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+
+}
+.sidebar{
+    background-color:lightgray;
+    height: 100vh;
+}
+.sidebar div{
+    padding: 10px;
+}
+i{
+    margin-right: 5px;
+}
+.sidebar div:hover{
+    background-color: gray;
+    cursor: pointer;
+    color: white;
+}
+.content{
+    height: 100vh;
+}
+.folder-icon {
+    color: red;
+}
+.add-button {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove border */
+    color: white; /* White text */
+    padding: 15px 32px; /* Some padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer; /* Mouse pointer on hover */
+    border-radius: 12px; /* Rounded corners */
+    transition-duration: 0.4s; /* Transition effect */
+}
+
+.add-button:hover {
+    background-color: #45a049; /* Green background on hover */
+}
+
+
+.today-icon {
+    color: blue;
+}
+
+.upcoming-icon {
+    color: green;
+}
+
+.anytime-icon {
+    color: yellow;
+}
+
+.someday-icon {
+    color: purple;
+}
+
+.logbook-icon {
+    color: orange;
+}
+
+.trash-icon {
+    color: black;
+}
+dialog {
+    border: none; /* Remove default border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    width: 80%; /* Dialog width */
+    max-width: 500px; /* Maximum width */
+    padding: 20px; /* Padding around content */
+    margin: 0 auto; /* Center dialog */
+    position: fixed; /* Fixed position */
+    left: 50%; /* Center horizontally */
+    top: 50%; /* Center vertically */
+    transform: translate(-50%, -50%); /* Correct position */
+    background: #fff; /* White background */
+}
+
+dialog form {
+    display: flex;
+    flex-direction: column; /* Stack form fields vertically */
+}
+
+dialog label {
+    font-weight: bold; /* Bold label text */
+    margin-bottom: 5px; /* Space below label */
+    margin-right: 10px;
+}
+
+dialog input[type="text"] {
+    padding: 10px; /* Padding inside text field */
+    margin-bottom: 20px; /* Space below text field */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px; /* Slightly rounded corners */
+}
+
+dialog input[type="submit"] {
+    background: #4CAF50; /* Green background */
+    color: #fff; /* White text */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Padding around text */
+    border-radius: 5px; /* Slightly rounded corners */
+    cursor: pointer; /* Hand cursor on hover */
+}
+
+dialog input[type="submit"]:hover {
+    background: #45a049; /* Darker green on hover */
+}
+#cancel{
+        background: #f44336; /* Red background */
+        color: #fff; /* White text */
+}
+#cancel:hover{
+        background: #d32f2f; /* Darker red on hover */
+}
+.button-container{
+    display: flex;
+    gap: 20px;
+}
+.projects>div>div>ul>li{
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.projects>div>div>ul>li {
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px; /* Slightly rounded corners */
+    padding: 10px; /* Padding inside list item */
+    margin-bottom: 10px; /* Space below list item */
+    position: relative; /* Allow absolute positioning of child elements */
+    overflow: hidden; /* Hide overflow content */
+    max-height: 50px; /* Initial max-height for collapsed state */
+    transition: max-height 0.2s ease-out; /* Transition effect for expanding and collapsing */
+}
+
+.projects>div>div>ul>li.expanded {
+    max-height: 500px; /* Max-height for expanded state */
+}
+
+.projects>div>div>ul>li::before {
+    content: '▶'; /* Arrow icon for collapsed state */
+    position: absolute; /* Absolute positioning */
+    left:-1px; /* Position to the left of the list item */
+    
+}
+.projects>div>div>ul>li:hover::before {
+    color: #4CAF50; /* Green arrow on hover */
+}
+
+.projects>div>div>ul>li.expanded::before {
+    content: '▼'; /* Arrow icon for expanded state */
+}
+.projects>div>div{
+    border: 1px solid lightgray;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+#todo-dialog {
+    border: none; /* Remove default border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    width: 80%; /* Dialog width */
+    max-width: 500px; /* Maximum width */
+    padding: 20px; /* Padding around content */
+    margin: 0 auto; /* Center dialog */
+    position: fixed; /* Fixed position */
+    left: 50%; /* Center horizontally */
+    top: 50%; /* Center vertically */
+    transform: translate(-50%, -50%); /* Correct position */
+    background: #fff; /* White background */
+}
+
+#todo-dialog div {
+    margin-bottom: 20px; /* Space below each div */
+}
+
+#todo-dialog label {
+    display: block; /* Display label on its own line */
+    font-weight: bold; /* Bold label text */
+    margin-bottom: 5px; /* Space below label */
+}
+
+#todo-dialog input[type="text"],
+#todo-dialog input[type="date"],
+#todo-dialog textarea,
+#todo-dialog select {
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding inside field */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px; /* Slightly rounded corners */
+}
+.todo-details button{
+    margin-right: 5px;
+}
+#edit-todo-dialog {
+    border: none; /* Remove default border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    width: 80%; /* Dialog width */
+    max-width: 500px; /* Maximum width */
+    padding: 20px; /* Padding around content */
+    margin: 0 auto; /* Center dialog */
+    position: fixed; /* Fixed position */
+    left: 50%; /* Center horizontally */
+    top: 50%; /* Center vertically */
+    transform: translate(-50%, -50%); /* Correct position */
+    background: #fff; /* White background */
+}
+
+#edit-todo-dialog h1 {
+    text-align: center; /* Center title */
+    margin-bottom: 20px; /* Space below title */
+}
+
+#edit-todo-dialog div {
+    margin-bottom: 20px; /* Space below each div */
+}
+
+#edit-todo-dialog label {
+    display: block; /* Display label on its own line */
+    font-weight: bold; /* Bold label text */
+    margin-bottom: 5px; /* Space below label */
+}
+
+#edit-todo-dialog input[type="text"],
+#edit-todo-dialog input[type="date"],
+#edit-todo-dialog textarea {
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding inside field */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px; /* Slightly rounded corners */
+}
+.active{
+    background-color: gray;
+    color: white;
+}
+
