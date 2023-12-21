@@ -1,5 +1,5 @@
 import createToDoProject from "./createToDoTask";
-import { projects,renderProjects,contentDiv,projectIndexer,getprojectsFromLocalStorage} from "./toDoGUI";
+import { projects,renderProjects,projectIndexer,getprojectsFromLocalStorage} from "./toDoGUI";
 import { createToDo } from "./createToDoTask";
 const addbtn=document.querySelector('.add-button');
 const dialog=document.querySelector('.Project-dialog');
@@ -12,6 +12,7 @@ const toDoConfirmBtn=document.querySelector('#todo-dialog #confirm');
 confirmBtn.addEventListener('click',()=>{
     const project=createToDoProject(projectname.value,[]);
     projects.push(project);
+    const contentDiv=document.querySelector('.projects');
     contentDiv.innerHTML="";
     localStorage.setItem('projects',JSON.stringify(projects));
     contentDiv.appendChild(renderProjects(getprojectsFromLocalStorage()));
@@ -34,6 +35,7 @@ toDoConfirmBtn.addEventListener('click',()=>{
     );
     projects[projectIndex].todoItems.push(todo);
     localStorage.setItem('projects',JSON.stringify(projects));
+    const contentDiv=document.querySelector('.projects');
     contentDiv.innerHTML="";
     contentDiv.appendChild(renderProjects(getprojectsFromLocalStorage()));
 });

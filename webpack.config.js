@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry:'./src/toDoGUI.js',
   devtool: 'inline-source-map',
     devServer: {
@@ -10,7 +10,8 @@ module.exports = {
     },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './dist/index.html',
+
     }),
   ],
   output: {
